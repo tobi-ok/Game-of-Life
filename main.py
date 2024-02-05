@@ -15,14 +15,17 @@ class game:
         self.live_cell = ' 🟦 '
         self.dead_cell = ' ⬜ '
 
+        # Start with random board and render
         self.current_state = self.random_state()
         self.render()
 
+    # Generate random board
     def random_state(self):
         board = [[0 if random.random() >= (life_probability/100) else 1 for _ in range(self.height)] for _ in range(self.width)]
 
         return board
     
+    # Check if board freezes
     def check_state(self):
         if self.current_state == self.last_state:
             self.dead_state_count += 1
@@ -96,10 +99,11 @@ class game:
 
         print(game_map)
 
-gol = game(game_width, game_height)
+if __name__ == '__main__':
+    gol = game(game_width, game_height)
 
-while not gol.check_state():
-    gol.next_board_state()
-    time.sleep(0.1)
+    while not gol.check_state():
+        gol.next_board_state()
+        time.sleep(0.1)
 
-print('Game over!')
+    print('Game over!')
